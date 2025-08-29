@@ -28,3 +28,39 @@ if (card) {
 }
   });
 }
+//copy
+document.querySelectorAll(".copyBtn").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const serviceName = document.querySelector(".service-name").innerText;
+      const serviceNumber = document.querySelector(".service-number").innerText;
+
+      const counterBtn = document.getElementById("copyCount");
+      let count = parseInt(counterBtn.innerText);
+      count++;
+      counterBtn.innerText = count + " Copy";
+
+     
+      alert(serviceName + " - " + serviceNumber + " copied!");
+    });
+  });
+  //call history
+document.querySelectorAll(".callBtn").forEach((btn) => {
+  btn.addEventListener("click", function () {
+    const card = this.closest(".card"); 
+    const Name = card.querySelector(".name").innerText;
+    const serviceNumber = card.querySelector(".service-number").innerText;
+
+    const now = new Date();
+    const time = now.toLocaleTimeString(); 
+    const date = now.toLocaleDateString(); 
+
+    const historyList = document.getElementById("callHistoryList");
+    const li = document.createElement("li");
+    li.innerText = `${Name} - ${serviceNumber} (${time})`;
+    historyList.appendChild(li);
+  });
+});
+
+document.getElementById("clearHistory").addEventListener("click", function () {
+  document.getElementById("callHistoryList").innerHTML = "";
+});
